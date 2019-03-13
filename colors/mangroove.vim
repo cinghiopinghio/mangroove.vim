@@ -1,4 +1,4 @@
-  " Name:       mangroove.vim
+" Name:       mangroove.vim
 " Version:    0.0.1
 " Maintainer: github.com/cinghiopinghio
 " License:    GPL3
@@ -97,7 +97,7 @@ if   &background == "dark"
     let s:mg.bg  = s:gb.dark0
   endif
   let s:mg.fg  = s:gb.light0
-  for shade in ['0', '1', '2', '3', 4]
+  for shade in ['0', '1', '2', '3', '4']
     let s:mg['bg' . shade] = s:gb['dark' . shade]
     let s:mg['fg' . shade] = s:gb['light' . shade]
   endfor
@@ -123,7 +123,7 @@ else
     let s:mg.bg  = s:gb.light0
   endif
   let s:mg.fg  = s:gb.dark0
-  for shade in ['0', '1', '2', '3', 4]
+  for shade in ['0', '1', '2', '3', '4']
     let s:mg['bg' . shade] = s:gb['light' . shade]
     let s:mg['fg' . shade] = s:gb['dark' . shade]
   endfor
@@ -296,24 +296,24 @@ hi! link SpecialComment   Special
 hi! link Debug            Special
 
 " user defined colors for statusline
-call s:hl('User1',        s:mg.fg,           s:mg.bg1)
-call s:hl('User2',        s:mg.fg4,          s:mg.bg1)
-call s:hl('User3',        s:mg.red_fg,       s:mg.bg1)
-call s:hl('User4',        s:mg.accent_fg,    s:mg.bg1)
-call s:hl('User5',        s:mg.yellow_fg,    s:mg.bg1)
+" call s:hl('User1',        s:mg.fg,           s:mg.bg1)
+" call s:hl('User2',        s:mg.fg4,          s:mg.bg1)
+" call s:hl('User3',        s:mg.red_fg,       s:mg.bg1)
+" call s:hl('User4',        s:mg.accent_fg,    s:mg.bg1)
+" call s:hl('User5',        s:mg.yellow_fg,    s:mg.bg1)
 
-call s:hl("DiffChange",   "",                s:mg.gray)
+call s:hl("DiffChange",   "",                s:mg.bg4)
 call s:hl("DiffAdd",      "",                s:mg.accent_bg)
 call s:hl("DiffDelete",   "",                s:mg.fg)
 call s:hl("DiffText",     "",                s:mg.secondary_bg)
 
 call s:hl("Directory",    s:mg.blue_fg)
 
-call s:hl("Error",        s:mg.red_fg,       "", "bold")
-call s:hl("ErrorMsg",     s:mg.red_fg)
-call s:hl("Warning",      s:mg.yellow_fg,    "", "bold")
-call s:hl("WarningMsg",   s:mg.yellow_fg)
-call s:hl("MoreMsg",      s:mg.bg4,          "",      "bold")
+call s:hl("Error",        s:mg.red_fg,       s:mg.bg, "bold")
+call s:hl("ErrorMsg",     s:mg.red_fg,       s:mg.bg)
+call s:hl("Warning",      s:mg.yellow_fg,    s:mg.bg, "bold")
+call s:hl("WarningMsg",   s:mg.yellow_fg,    s:mg.bg)
+call s:hl("MoreMsg",      s:mg.bg4,          s:mg.bg, "bold")
 hi! link Question ErrorMsg
 
 call s:hl("FoldColumn",   s:mg.gray,          s:mg.bg1)
@@ -326,6 +326,7 @@ call s:hl("LineNr",       s:mg.fg4,          s:mg.bg1)
 hi! link CursorLine CursorColumn
 hi! link StatusLine CursorColumn
 hi! link StatusLineNC LineNr
+hi! link SignColumn LineNr
 "call s:h("StatusLine",    {"bg": s:bg_very_subtle})
 "call s:h("StatusLineNC",  {"bg": s:bg_very_subtle, "fg": s:bg_subtle})
 
@@ -344,11 +345,10 @@ call s:hl("VisualNOS",    "", s:mg.bg4)
 "
 " RECHECK
 
-call s:hl("SignColumn",   s:mg.accent_fg)
 hi! link SpecialKey SignColumn
 call s:hl("Title",        s:mg.blue_fg)
 call s:hl("Underlined",   "", "", "underline")
-call s:hl("WildMenu",     s:mg.bg, s:mg.fg)
+call s:hl("WildMenu",     s:mg.bg0, s:mg.fg)
 hi! link ModeMsg MoreMsg
 
 
@@ -357,9 +357,9 @@ call s:hl("SpellCap",     s:mg.secondary_fg, "", "underline")
 hi! link SpellRare SpellBad
 hi! link SpellLocal SpellCap
 
-call s:hl("Pmenu",        s:mg.fg, s:mg.bg1)
+call s:hl("Pmenu",        s:mg.fg, s:mg.bg2)
 call s:hl("PmenuSel",     s:mg.fg, s:mg.secondary_bg)
-call s:hl("PmenuSbar",    s:mg.fg, s:mg.bg2)
+call s:hl("PmenuSbar",    s:mg.fg, s:mg.bg3)
 hi! link PmenuThumb PmenuSbar
 call s:hl("TabLine",      s:mg.fg, s:mg.bg1)
 call s:hl("TabLineSel",   s:mg.accent_fg, s:mg.bg3, "bold")
@@ -386,8 +386,10 @@ hi link NeomakeWarningSign      WarningMsg
 hi link NeomakeErrorSign        ErrorMsg
 
 " ALE
-hi link ALEWarningSign  WarningMsg
-hi link ALEErrorSign    ErrorMsg
+call s:hl("ALEWarningSign", s:mg.yellow_fg,    s:mg.bg1)
+call s:hl("ALEErrorSign",   s:mg.red_fg,    s:mg.bg1)
+" hi link ALEWarningSign  WarningMsg
+" hi link ALEErrorSign    ErrorMsg
 
 " Signify, git-gutter
 hi link SignifySignAdd              LineNr
@@ -400,7 +402,7 @@ hi link GitGutterChangeDelete       LineNr
 
 " Python
 call s:hl("Python",        s:mg.fg4, "", "italic")
-hi! link pythonBuiltin     Python
+hi! link pythonBuiltin     Constant
 hi! link pythonBuiltinObj  Python
 hi! link pythonBuiltinFunc Python
 hi! link pythonFunction    Normal
